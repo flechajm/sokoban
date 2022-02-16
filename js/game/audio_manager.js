@@ -98,7 +98,7 @@ class AudioManager {
      * @returns {String} Sound path.
      */
     #getSource(sound) {
-        return '/audio/' + sound + '.mp3';
+        return 'audio/' + sound + '.mp3';
     }
 }
 

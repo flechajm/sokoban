@@ -218,7 +218,7 @@ class Canvas {
      */
     #loadSprites() {
         this.sprite = new Image();
-        this.sprite.src = '/img/sprite.png';
+        this.sprite.src = 'img/sprite.png';
         this.sprite.onload = () => {
             this.render();
         };
