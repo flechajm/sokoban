@@ -1,0 +1,323 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+:root {
+  --body-bg: #303070;
+  --light-color: #ddd;
+  --border-canvas: #26243a;
+  --options: lightblue;
+  --hover: #8282df;
+  --active: #a7a7f7;
+
+  --lvlinfo-height: 120px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background: var(--border-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--hover);
+  border-radius: 30px;
+}
+
+body {
+  margin: 0;
+
+  -webkit-font-smoothing: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--body-bg);
+  font-family: "Press Start 2P", cursive;
+  color: var(--light-color);
+  height: 100vh;
+}
+
+a {
+  color: var(--light-color);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--hover);
+  }
+
+  &:active {
+    color: var(--active);
+  }
+}
+
+#game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+  height: 100vh;
+
+  #title {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: min-content;
+    font-size: 6rem;
+    color: white;
+    text-shadow: var(--border-canvas) 5px 5px 5px;
+    margin: 80px 0;
+
+    &::after {
+      content: "by JMF";
+      font-size: 1.5rem;
+    }
+  }
+
+  #start-menu {
+    display: flex;
+    align-items: center;
+    height: 400px;
+    margin-top: -20%;
+    font-size: x-large;
+
+    #start-options {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 300px;
+
+      div {
+        width: auto;
+        padding-right: 10px;
+      }
+    }
+
+    #game-paused {
+      display: none;
+      color: crimson;
+    }
+
+    #resume-option {
+      display: none;
+    }
+
+    #options {
+      display: none;
+    }
+
+    #controls {
+      display: none;
+    }
+
+    #statistics {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 400px;
+
+      :not(.back) div {
+        justify-content: flex-start;
+      }
+
+      .scroll {
+        overflow-y: auto;
+      }
+    }
+
+    .option {
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      // align-self: center;
+      width: 430px;
+
+      &.back {
+        justify-content: center;
+      }
+
+      &.disabled {
+        cursor: default;
+      }
+
+      &:not(.disabled):hover {
+        color: var(--hover);
+      }
+
+      &:not(.disabled):active {
+        color: var(--active);
+      }
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 40px;
+      color: var(--light-color);
+
+      .value {
+        display: flex;
+        align-items: end;
+      }
+
+      .title {
+        color: var(--options);
+        text-decoration: underline;
+      }
+
+      .fixed {
+        padding-right: 10px;
+      }
+    }
+  }
+
+  #game-container {
+    display: none;
+    flex-direction: column;
+    width: 70vw;
+    max-width: 70vw;
+    max-height: 90vh;
+    align-items: center;
+    justify-content: center;
+
+    #level-info {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: var(--lvlinfo-height);
+      top: 30;
+      padding: 10px;
+      font-size: 1.5rem;
+
+      #level {
+        font-size: 2rem;
+      }
+
+      :nth-child(2n) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+
+        div {
+          width: auto;
+        }
+      }
+    }
+
+    #canvas-container {
+      display: block;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      max-width: 100%;
+      max-height: 65vh;
+      overflow: hidden;
+      position: absolute;
+      background-color: black;
+      border-right: 4px solid var(--border-canvas);
+      border-bottom: 4px solid var(--border-canvas);
+      outline: 4px solid var(--light-color);
+      margin-top: var(--lvlinfo-height);
+
+      #win-dialog {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        font-size: xxx-large;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      canvas {
+        display: flex;
+        flex: 0 0 auto;
+        image-rendering: optimizeSpeed;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: optimize-contrast;
+        -ms-interpolation-mode: nearest-neighbor;
+        image-rendering: pixelated;
+        background-color: #26243a;
+      }
+    }
+  }
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  bottom: 20px;
+  position: absolute;
+  font-size: small;
+  line-height: 20px;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    margin-top: -8px;
+    padding: 0 5px;
+    text-shadow: red 0px 0px 5px;
+  }
+}
+
+kbd {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  background-color: #eee;
+  border-radius: 3px;
+  border: 1px solid #b4b4b4;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2),
+    0 2px 0px 0px rgba(255, 255, 255, 0.7) inset;
+  color: #333;
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 1;
+  padding: 2px 4px;
+  min-width: 30px;
+  text-align: center;
+  white-space: nowrap;
+  margin: 2px 5px;
+  top: -1px;
+
+  &:active {
+    background-color: #dfdfdf;
+    top: 0;
+  }
+}

@@ -1,0 +1,149 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Sokoban — by JMF</title>
+  </head>
+  <body>
+    <div id="game">
+      <div id="title">SOKOBAN</div>
+      <div id="start-menu">
+        <div id="start-options">
+          <div id="game-paused" class="option disabled">
+            <div>
+              - GAME PAUSED -
+              <br />
+              <br />
+            </div>
+          </div>
+          <div id="new-game-option" class="option">
+            <div>🚩</div>
+            <div>NEW GAME</div>
+          </div>
+          <div id="continue-option" class="option">
+            <div>💾</div>
+            <div>CONTINUE</div>
+          </div>
+          <div id="controls-option" class="option">
+            <div>🕹️</div>
+            <div>CONTROLS</div>
+          </div>
+          <div id="options-option" class="option">
+            <div>⚙️</div>
+            <div>OPTIONS</div>
+          </div>
+          <div id="statistics-option" class="option">
+            <div>🏅</div>
+            <div>STATISTICS</div>
+          </div>
+          <br />
+          <div id="resume-option" class="option disabled">
+            <div>↪️</div>
+            <div>ESC to RESUME</div>
+          </div>
+        </div>
+        <div id="options" class="menu">
+          <div class="title">OPTIONS</div>
+          <br /><br />
+          <div id="bgm" class="option">
+            <div>Music</div>
+            <div class="value">
+              <div>ON</div>
+              <div>🔊</div>
+            </div>
+          </div>
+          <div id="sfx" class="option">
+            <div>SFX</div>
+            <div class="value">
+              <div>ON</div>
+              <div>🔊</div>
+            </div>
+          </div>
+          <br /><br /><br />
+          <div class="option back">BACK</div>
+        </div>
+        <div id="controls" class="menu">
+          <div class="title">CONTROLS</div>
+          <br /><br />
+          <div class="option disabled">
+            <div>Move Up:</div>
+            <div class="value">
+              <div><kbd>W</kbd></div>
+              /
+              <div><kbd>↑</kbd></div>
+            </div>
+          </div>
+          <div class="option disabled">
+            <div>Move Left:</div>
+            <div class="value">
+              <div><kbd>A</kbd></div>
+              /
+              <div><kbd>←</kbd></div>
+            </div>
+          </div>
+          <div class="option disabled">
+            <div>Move Down:</div>
+            <div class="value">
+              <div><kbd>S</kbd></div>
+              /
+              <div><kbd>↓</kbd></div>
+            </div>
+          </div>
+          <div class="option disabled">
+            <div>Move Right:</div>
+            <div class="value">
+              <div><kbd>D</kbd></div>
+              /
+              <div><kbd>→</kbd></div>
+            </div>
+          </div>
+          <br />
+          <div class="option disabled">
+            <div>Reset Level:</div>
+            <div class="value"><kbd>R</kbd></div>
+          </div>
+          <br /><br /><br />
+          <div class="option back">BACK</div>
+        </div>
+        <div id="statistics" class="menu">
+          <div class="title">STATISTICS</div>
+          <br /><br />
+          <div class="scroll"></div>
+          <br /><br /><br />
+          <div class="option back">BACK</div>
+        </div>
+      </div>
+      <div id="game-container">
+        <div id="level-info">
+          <div id="level"></div>
+          <div>
+            <div id="time"></div>
+            <div id="moves"></div>
+          </div>
+        </div>
+        <div id="canvas-container">
+          <div id="win-dialog">LINE #1<br /><br />LINE #2</div>
+          <canvas id="canvas" tabindex="0">
+            Your browser does not support the canvas element.
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div>BUILT WITH<span>❤️</span>IN JS+HTML+CSS</div>
+      <div>
+        <a
+          href="http://github.com/flechajm/sokoban"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub Repository</a
+        >
+      </div>
+    </footer>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
