@@ -12,7 +12,7 @@ class Sokoban {
     #statistics;
     #gameController;
     #audioManager;
-    #preparingNextLevel;
+    #isPreparingNextLevel;
     #isGameStarted;
     #titleClicks;
 
@@ -27,7 +27,7 @@ class Sokoban {
         this.#title = "SOKOBAN";
         this.#statistics = [];
         this.#audioManager = new AudioManager();
-        this.#preparingNextLevel = false;
+        this.#isPreparingNextLevel = false;
         this.#isGameStarted = false;
         this.#titleClicks = 0;
         this.#initialize();
@@ -180,7 +180,7 @@ class Sokoban {
      * @param {Boolean} preparing   Is prerparing the next level? 
      */
     preparingNextLevel(preparing) {
-        this.#preparingNextLevel = preparing;
+        this.#isPreparingNextLevel = preparing;
     }
 
     isGameStarted() {
@@ -271,7 +271,7 @@ class Sokoban {
             KeyX: () => { this.#audioManager.toggleSFX(); },
 
             Escape: () => {
-                if (!this.#preparingNextLevel && this.#isGameStarted) {
+                if (!this.#isPreparingNextLevel && this.#isGameStarted) {
                     this.#showMainMenu(!this.#gameController.isPaused());
                 }
             }
