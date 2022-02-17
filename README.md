@@ -6,13 +6,10 @@
 </p>
 <br />
 <br />
-<br />
 
 # About
 *Sokoban is a puzzle video game genre in which the player pushes crates or boxes around in a warehouse, trying to get them to storage locations.*
 [Click for more info](https://en.wikipedia.org/wiki/Sokoban).
-<br />
-<br />
 
 # Description
 This is another Sokoban game. I've made it in **JavaScript (ES6)** + **HTML** + **CSS**.
@@ -22,10 +19,8 @@ This is another Sokoban game. I've made it in **JavaScript (ES6)** + **HTML** + 
 </p>
 <br />
 It was a challenge, because I built the prototype in a few hours with simple arrays, a canvas and color blocks. Then, took me two weeks to finally finish it complete with the graphics that I've made in pixel art and only three levels (believe me, make levels it's really hard).
-<br />
-<br />
 
-# The game
+# Sokoban
 You can [play the game](https://flechajm.github.io/sokoban/) online.
 
 <ins>Controls:</ins>
@@ -40,14 +35,10 @@ You can [play the game](https://flechajm.github.io/sokoban/) online.
 - You **CAN'T** pull the boxes.
 - You **CAN'T** undo a movement.
 - You **CAN** restart the level (R) as many times you want without punishment in the statistics.
-<br />
-<br />
 
 # Libs
 - [Howler.js](https://howlerjs.com) for the audio controller.
 - [KeyboardController](js/libs/keyboard_controller.js) to properly handle the key binding in the game.
-<br />
-<br />
 
 # Credits
 - Juan Manuel Flecha: Programming & Pixel Art graphics.
