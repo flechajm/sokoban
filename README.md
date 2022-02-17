@@ -12,7 +12,7 @@
 [Click for more info](https://en.wikipedia.org/wiki/Sokoban).
 
 # Description
-This is another Sokoban game. I've made it in **JavaScript (ES6)** + **HTML** + **CSS**.
+This is another Sokoban game. I've made it in **JavaScript (ES6)** + **HTML (Canvas API)** + **CSS (SCSS)**.
 <br /><br />
 <p align="center">
   <img src="https://gcdnb.pbrd.co/images/jEvfmjLaRcFa.png">
