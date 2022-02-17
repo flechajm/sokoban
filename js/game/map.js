@@ -1,6 +1,7 @@
 import Position from "./position.js";
 import Tile from './tile.js';
-import { levels, tileTypes } from './constants.js';
+import levels from "./levels.js";
+import { tileTypes } from './constants.js';
 
 class Map {
     #tileSize;
@@ -73,6 +74,7 @@ class Map {
             '⭕': tileTypes.goal,
             '🔴': tileTypes.onGoal,
             '🧱': tileTypes.wall,
+            '⚫': tileTypes.background,
         }
 
         this.level.forEach((row, y) => {

@@ -110,7 +110,7 @@ class Canvas {
 
         // Draw the floor.
         if (tile.getType() === tileTypes.boxGoal) {
-            this.#context.drawImage(this.sprite, 16, 16, tileSize, tileSize, posX, posY, 8, tileSize);
+            this.#context.drawImage(this.sprite, 16, 16, tileSize, tileSize, posX, posY, tileSize, tileSize);
         } else {
             this.#context.drawImage(this.sprite, 0, 16, tileSize, tileSize, posX, posY, tileSize, tileSize);
         }
@@ -188,6 +188,10 @@ class Canvas {
                 return new Position(16, 16);
             case tileTypes.wall:
                 return new Position(16, 0);
+            case tileTypes.empty:
+                return new Position(0, 16);
+            case tileTypes.background:
+                return new Position(16, 32);
             default:
                 return new Position(0, 16);
         }
