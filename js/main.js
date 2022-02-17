@@ -1,7 +1,12 @@
 import Sokoban from './game/sokoban.js';
-import { levels } from './game/constants.js';
+import levels from './game/levels.js';
 
 const sokoban = new Sokoban(levels);
 sokoban.load();
 
-window.sokoban = sokoban;
+document.onreadystatechange = function () {
+    var state = document.readyState;
+    if (state == 'complete') {
+        document.getElementById('loader').style.visibility = "hidden";
+    }
+}
