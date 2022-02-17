@@ -183,6 +183,10 @@ class Sokoban {
         this.#isPreparingNextLevel = preparing;
     }
 
+    /**
+     * Get if the game has starded.
+     * @returns {Boolean}
+     */
     isGameStarted() {
         return this.#isGameStarted;
     }
