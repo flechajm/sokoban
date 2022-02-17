@@ -172,8 +172,8 @@ class Canvas {
 
     /**
      * Gets the sprite position for the current tile type.
-     * @param {tileTypes} tileType Tile type.
-     * @returns {Position} Sprite position.
+     * @param {tileTypes} tileType  Tile type.
+     * @returns {Position}          Sprite position.
      */
     #getSpritePosition(tileType) {
         switch (tileType) {
