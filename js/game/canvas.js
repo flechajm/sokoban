@@ -168,6 +168,7 @@ class Canvas {
     // ⭕ Goal
     // 🔴 Character on goal
     // 🧱 Wall
+    // ⚫ Background
 
     /**
      * Gets the sprite position for the current tile type.
