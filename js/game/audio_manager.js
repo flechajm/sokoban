@@ -40,11 +40,19 @@ class AudioManager {
 
     /**
      * Toggles the BGM between ON and OFF.
+     * @param {Boolean} playWhenToggle  Sets if the BGM should be play itself when toggle.
      * @returns {Boolean} State of BGM.
      */
-    toggleBGM() {
+    toggleBGM(playWhenToggle = true) {
         this.bgmOn = !this.bgmOn;
-        this.#bgm?.mute(!this.bgmOn);
+
+        if (!this.bgmOn) {
+            this.#bgm?.stop();
+        } else if (playWhenToggle) {
+            this.#setBGM(this.#getSource(soundTypes.bgm));
+        }
+
+        this.#updateDOM('bgm');
 
         return this.bgmOn;
     }
@@ -57,7 +65,16 @@ class AudioManager {
         this.sfxOn = !this.sfxOn;
         this.#sfx?.mute(!this.bgmOn);
 
+        this.#updateDOM('sfx');
+
         return this.sfxOn;
+    }
+
+    #updateDOM(id) {
+        let onOff = id == 'bgm' ? this.bgmOn : this.sfxOn;
+        const element = document.getElementById(id);
+        const value = element.getElementsByClassName('value')[0];
+        value.innerHTML = onOff ? '<div>ON</div><div>🔊</div>' : '<div>OFF</div><div>🔈</div>';
     }
 
     /**

@@ -3,15 +3,18 @@ import AudioManager from './audio_manager.js';
 import LevelStatistic from './level_statistic.js';
 import GameController from './game_controller.js';
 import KeyboardController from '../libs/keyboard_controller.js';
-import { directions, levels } from './constants.js';
+import levels from './levels.js';
+import { directions } from './constants.js';
 
 class Sokoban {
+    #startLevel;
     #title;
     #statistics;
     #gameController;
     #audioManager;
     #preparingNextLevel;
     #isGameStarted;
+    #titleClicks;
 
     /**
      * Creates an instance of a Sokoban game.
@@ -20,11 +23,13 @@ class Sokoban {
     constructor(levels) {
         this.levels = levels;
         this.currentLevel = 1;
+        this.#startLevel = 1;
         this.#title = "SOKOBAN";
         this.#statistics = [];
         this.#audioManager = new AudioManager();
         this.#preparingNextLevel = false;
         this.#isGameStarted = false;
+        this.#titleClicks = 0;
         this.#initialize();
     }
 
@@ -33,7 +38,7 @@ class Sokoban {
      */
     start(level) {
         this.#isGameStarted = true;
-        if (level == 1) this.clearStatistics();
+        if (level == this.#startLevel) this.clearStatistics();
 
         this.currentLevel = level;
         this.#reset();
@@ -47,7 +52,6 @@ class Sokoban {
             gameController.setMap(map);
         }
 
-        this.#rainbowTitle(this.#title);
         this.#showGameContainer();
         this.#gameController.unpause();
     }
@@ -179,6 +183,10 @@ class Sokoban {
         this.#preparingNextLevel = preparing;
     }
 
+    isGameStarted() {
+        return this.#isGameStarted;
+    }
+
     /**
      * Shows the Game Container.
      */
@@ -198,7 +206,7 @@ class Sokoban {
      * Prepares and config the game.
      */
     #initialize() {
-        this.#rainbowTitle(this.#title);
+        this.rainbowTitle(this.#title);
         this.#bindListeners();
     }
 
@@ -232,9 +240,9 @@ class Sokoban {
 
         newGameOptionDOM.addEventListener('click', () => {
             localStorage.removeItem(sokoban.getTitle());
-            sokoban.start(1);
+            sokoban.start(this.#startLevel);
         });
-        titleDOM.addEventListener('click', this.#rainbowTitle.bind(null, this.#title));
+        titleDOM.addEventListener('click', () => sokoban.rainbowTitle(sokoban.getTitle()));
         continueOptionDOM.addEventListener('click', () => sokoban.start(sokoban.currentLevel));
         constrolsOptionDOM.addEventListener('click', this.#showControlsMenu);
         optionsOptionDOM.addEventListener('click', this.#showOptionsMenu);
@@ -242,10 +250,8 @@ class Sokoban {
         Array.from(backButtonsDOM).forEach(button => {
             button.addEventListener('click', this.#showStartOptions);
         });
-        bgmDOM.addEventListener('click', this.#toggleAudio);
-        bgmDOM.audioManager = this.#audioManager;
-        sfxDOM.addEventListener('click', this.#toggleAudio);
-        sfxDOM.audioManager = this.#audioManager;
+        bgmDOM.addEventListener('click', () => sokoban.getAudioManager().toggleBGM(sokoban.isGameStarted()));
+        sfxDOM.addEventListener('click', () => sokoban.getAudioManager().toggleSFX());
 
         new KeyboardController({
             KeyW: () => { this.#keyDirectionHandler(directions.up); },
@@ -261,6 +267,8 @@ class Sokoban {
             ArrowLeft: () => { this.#keyDirectionHandler(directions.left); },
 
             KeyR: () => { if (!this.#gameController.isPaused()) this.start(this.currentLevel); },
+            KeyM: () => { this.#audioManager.toggleBGM(); },
+            KeyX: () => { this.#audioManager.toggleSFX(); },
 
             Escape: () => {
                 if (!this.#preparingNextLevel && this.#isGameStarted) {
@@ -271,16 +279,8 @@ class Sokoban {
     }
 
     /**
-     * Toggle the BGM / SFX on or off.
-     * @param {Event} e Event
+     * Shows the Main Menu.
      */
-    #toggleAudio(e) {
-        const audioManager = e.currentTarget.audioManager;
-        const status = this.id === 'bgm' ? audioManager.toggleBGM() : audioManager.toggleSFX();
-        const value = this.getElementsByClassName('value')[0];
-        value.innerHTML = status ? '<div>ON</div><div>🔊</div>' : '<div>OFF</div><div>🔈</div>';
-    }
-
     #showMainMenu() {
         this.#gameController.isPaused() ? this.#gameController.unpause() : this.#gameController.pause();
         const isPaused = this.#gameController.isPaused();
@@ -309,13 +309,15 @@ class Sokoban {
         startMenuDOM.style.display = isPaused ? 'flex' : 'none';
     }
 
+    /**
+     * Displays a "GAME PAUSED" title blink above of the start menu.
+     */
     #blinkGamePausedTitle() {
         const gamePausedDOM = document.getElementById('game-paused');
         gamePausedDOM.style.visibility = gamePausedDOM.style.visibility == 'visible' ? 'hidden' : 'visible';
 
         let blinkTimeoutId = setTimeout(() => {
             this.#blinkGamePausedTitle();
-            console.log(blinkTimeoutId);
         }, 1000);
 
         if (!this.#gameController.isPaused()) clearTimeout(blinkTimeoutId);
@@ -417,22 +419,37 @@ class Sokoban {
      * Sets the game title with rainbow colors. Just for fun :).
      * @param {String} title Game title.
      */
-    #rainbowTitle(title) {
-        const titleDOM = document.getElementById('title');
+    rainbowTitle(title) {
+        if (this.#titleClicks == 20) {
+            alert('Why so curious? 🤔\n\nHIGH CONTRAST MODE UNLOCKED 🔓');
 
-        let newTitle = '';
-        for (let i = 0; i < title.length; i++) {
-            const char = title[i];
+            const root = document.querySelector(':root');
+            root.style.setProperty('--body-bg', 'black');
+            root.style.setProperty('--light-color', 'cyan');
+            root.style.setProperty('--hover', 'deeppink');
+            root.style.setProperty('--active', 'hotpink');
+            root.style.setProperty('--options', 'orange');
+            root.style.setProperty('--blend-mode', 'color-burn');
+            root.style.setProperty('--win-dialog-bg', 'black');
+        } else if (this.#titleClicks < 20) {
+            const titleDOM = document.getElementById('title');
 
-            let red = Math.floor(Math.random() * (255 - 0) + 0);
-            let green = Math.floor(Math.random() * (255 - 0) + 0);
-            let blue = Math.floor(Math.random() * (255 - 0) + 0);
+            let newTitle = '';
+            for (let i = 0; i < title.length; i++) {
+                const char = title[i];
 
-            let newChar = `<span style="color: rgb(${red}, ${green}, ${blue});">${char}</span>`;
-            newTitle += newChar;
+                let red = Math.floor(Math.random() * (255 - 0) + 0);
+                let green = Math.floor(Math.random() * (255 - 0) + 0);
+                let blue = Math.floor(Math.random() * (255 - 0) + 0);
+
+                let newChar = `<span style="color: rgb(${red}, ${green}, ${blue});">${char}</span>`;
+                newTitle += newChar;
+            }
+
+            titleDOM.innerHTML = `<div>${newTitle}</div>`;
         }
 
-        titleDOM.innerHTML = `<div>${newTitle}</div>`;
+        this.#titleClicks += 1;
     }
 }
 

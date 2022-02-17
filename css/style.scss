@@ -7,6 +7,9 @@
   --options: lightblue;
   --hover: #8282df;
   --active: #a7a7f7;
+  --win-dialog-bg: rgba(0, 0, 0, 0.6);
+
+  --blend-mode: unset;
 
   --lvlinfo-height: 120px;
 }
@@ -62,10 +65,22 @@ a {
   }
 }
 
+#loader {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--body-bg);
+  position: absolute;
+  padding: 50px;
+  z-index: 9999;
+}
+
 #game {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   width: 50%;
   height: 100vh;
@@ -79,7 +94,6 @@ a {
     font-size: 6rem;
     color: white;
     text-shadow: var(--border-canvas) 5px 5px 5px;
-    margin: 80px 0;
 
     &::after {
       content: "by JMF";
@@ -146,7 +160,6 @@ a {
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-end;
-      // align-self: center;
       width: 430px;
 
       &.back {
@@ -173,7 +186,6 @@ a {
       align-items: center;
       position: relative;
       height: 40px;
-      color: var(--light-color);
 
       .value {
         display: flex;
@@ -237,7 +249,7 @@ a {
       max-height: 65vh;
       overflow: hidden;
       position: absolute;
-      background-color: black;
+      background-color: lightseagreen;
       border-right: 4px solid var(--border-canvas);
       border-bottom: 4px solid var(--border-canvas);
       outline: 4px solid var(--light-color);
@@ -253,9 +265,10 @@ a {
         text-align: center;
         font-size: xxx-large;
         position: absolute;
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: var(--win-dialog-bg);
         padding: 30px;
         top: 50%;
+        color: white;
         transform: translateY(-50%);
       }
 
@@ -269,6 +282,7 @@ a {
         -ms-interpolation-mode: nearest-neighbor;
         image-rendering: pixelated;
         background-color: #26243a;
+        mix-blend-mode: var(--blend-mode);
       }
     }
   }

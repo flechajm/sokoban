@@ -6,6 +6,8 @@
   --options: lightblue;
   --hover: #8282df;
   --active: #a7a7f7;
+  --win-dialog-bg: rgba(0, 0, 0, 0.6);
+  --blend-mode: unset;
   --lvlinfo-height: 120px;
 }
 
@@ -65,6 +67,24 @@ a:active {
   color: var(--active);
 }
 
+#loader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--body-bg);
+  position: absolute;
+  padding: 50px;
+  z-index: 9999;
+}
+
 #game {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -73,9 +93,8 @@ a:active {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -101,7 +120,6 @@ a:active {
   font-size: 6rem;
   color: white;
   text-shadow: var(--border-canvas) 5px 5px 5px;
-  margin: 80px 0;
 }
 
 #game #title::after {
@@ -237,7 +255,6 @@ a:active {
           align-items: center;
   position: relative;
   height: 40px;
-  color: var(--light-color);
 }
 
 #game #start-menu .menu .value {
@@ -334,7 +351,7 @@ a:active {
   max-height: 65vh;
   overflow: hidden;
   position: absolute;
-  background-color: black;
+  background-color: lightseagreen;
   border-right: 4px solid var(--border-canvas);
   border-bottom: 4px solid var(--border-canvas);
   outline: 4px solid var(--light-color);
@@ -355,9 +372,10 @@ a:active {
   text-align: center;
   font-size: xxx-large;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--win-dialog-bg);
   padding: 30px;
   top: 50%;
+  color: white;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
@@ -377,6 +395,7 @@ a:active {
   image-rendering: -o-pixelated;
   image-rendering: pixelated;
   background-color: #26243a;
+  mix-blend-mode: var(--blend-mode);
 }
 
 footer {
