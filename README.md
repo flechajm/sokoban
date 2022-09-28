@@ -5,7 +5,6 @@
   <img src="https://i.ibb.co/XDrPm4Z/image-2022-09-28-104434378.png">
 </p>
 <br />
-<br />
 
 # About
 *Sokoban is a puzzle video game genre in which the player pushes crates or boxes around in a warehouse, trying to get them to storage locations.*
