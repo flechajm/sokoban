@@ -2,7 +2,7 @@
 <br />
 <br />
 <p align="center">
-  <img src="https://gcdnb.pbrd.co/images/Reeciq4WBdLR.png">
+  <img src="https://i.ibb.co/XDrPm4Z/image-2022-09-28-104434378.png">
 </p>
 <br />
 <br />
@@ -15,7 +15,7 @@
 This is another Sokoban game. I've made it in **JavaScript (ES6)** + **HTML (Canvas API)** + **CSS (SCSS)**.
 <br /><br />
 <p align="center">
-  <img src="https://gcdnb.pbrd.co/images/jEvfmjLaRcFa.png">
+  <img src="https://i.ibb.co/ySczC69/html-css-js.png">
 </p>
 <br />
 It was a challenge, because I built the prototype in a few hours with simple arrays, a canvas and color blocks. Then, took me two weeks to finally finish it complete with the graphics that I've made in pixel art and only three levels (believe me, make levels it's really hard).
